@@ -20,7 +20,6 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0 , 0 ,0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -45,12 +44,9 @@ window.renderStatistics = function (ctx, names, times) {
     }
 
     var colHeight = -Math.round(COL_MAX_HEIGHT * times[j] / bestTime);
-    ctx.fillRect(CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j,
-    COL_START - CLOUD_Y, COL_WIDTH, colHeight);
+    ctx.fillRect(CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j, COL_START - CLOUD_Y, COL_WIDTH, colHeight);
     ctx.fillStyle = TEXT_COLOR;
-    ctx.fillText(Math.round(times[j]),
-    CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j, COL_START - CLOUD_Y * 2 + colHeight);
-    ctx.fillText(names[j], CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j,
-     COL_START + CLOUD_Y);
+    ctx.fillText(Math.round(times[j]), CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j, COL_START - CLOUD_Y * 2 + colHeight);
+    ctx.fillText(names[j], CLOUD_X + COL_WIDTH + (COL_WIDTH + COL_DISTANCE) * j, COL_START + CLOUD_Y);
   }
 };
