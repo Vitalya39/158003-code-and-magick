@@ -11,6 +11,8 @@ var COL_MAX_HEIGHT = 150;
 var COL_SPACE = 50;
 
 var renderCloud = function (ctx, x, y, color) {
+  ctx.fillStyle = 'rgba(0,0,0,0.7)';
+  ctx.fillRect(x, y, CLOUD_WIDTH + GAP, CLOUD_HEIGHT + GAP);
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
@@ -30,7 +32,6 @@ var getRandomColor = function (players) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0,0,0,0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   ctx.fillStyle = '#000';
@@ -41,13 +42,16 @@ window.renderStatistics = function (ctx, players, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < players.length; i++) {
+    var colHeight = COL_MAX_HEIGHT * times[i] / maxTime;
+    var colGap = COL_WIDTH + COL_SPACE;
+
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + COL_SPACE + (COL_WIDTH + COL_SPACE) * i, CLOUD_Y + GAP * 6 + COL_MAX_HEIGHT - (COL_MAX_HEIGHT * times[i] / maxTime));
+    ctx.fillText(Math.round(times[i]), CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 6 + COL_MAX_HEIGHT - colHeight);
 
     ctx.fillStyle = getRandomColor(players[i]);
-    ctx.fillRect(CLOUD_X + COL_SPACE + (COL_WIDTH + COL_SPACE) * i, CLOUD_Y + GAP * 7 + COL_MAX_HEIGHT - (COL_MAX_HEIGHT * times[i] / maxTime), COL_WIDTH, COL_MAX_HEIGHT * times[i] / maxTime);
+    ctx.fillRect(CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 7 + COL_MAX_HEIGHT - colHeight, COL_WIDTH, colHeight);
 
     ctx.fillStyle = '#000';
-    ctx.fillText(players[i], CLOUD_X + COL_SPACE + (COL_WIDTH + COL_SPACE) * i, CLOUD_Y + GAP * 9 + COL_MAX_HEIGHT);
+    ctx.fillText(players[i], CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 9 + COL_MAX_HEIGHT);
   }
 };
