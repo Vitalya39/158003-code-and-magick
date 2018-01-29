@@ -40,18 +40,19 @@ window.renderStatistics = function (ctx, players, times) {
   ctx.fillText('Список результатов: ', CLOUD_X + GAP * 4, CLOUD_Y + GAP * 4);
 
   var maxTime = getMaxElement(times);
+  var colGap = COL_WIDTH + COL_SPACE;
 
   for (var i = 0; i < players.length; i++) {
     var colHeight = COL_MAX_HEIGHT * times[i] / maxTime;
-    var colGap = COL_WIDTH + COL_SPACE;
+    var xPosition = CLOUD_X + COL_SPACE + colGap * i;
 
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 6 + COL_MAX_HEIGHT - colHeight);
+    ctx.fillText(Math.round(times[i]), xPosition, CLOUD_Y + GAP * 6 + COL_MAX_HEIGHT - colHeight);
 
     ctx.fillStyle = getRandomColor(players[i]);
-    ctx.fillRect(CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 7 + COL_MAX_HEIGHT - colHeight, COL_WIDTH, colHeight);
+    ctx.fillRect(xPosition, CLOUD_Y + GAP * 7 + COL_MAX_HEIGHT - colHeight, COL_WIDTH, colHeight);
 
     ctx.fillStyle = '#000';
-    ctx.fillText(players[i], CLOUD_X + COL_SPACE + colGap * i, CLOUD_Y + GAP * 9 + COL_MAX_HEIGHT);
+    ctx.fillText(players[i], xPosition, CLOUD_Y + GAP * 9 + COL_MAX_HEIGHT);
   }
 };
