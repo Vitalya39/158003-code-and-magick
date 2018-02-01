@@ -1,28 +1,37 @@
 'use strict';
+var WIZARD_NAMES = ['Лазарь', 'Авраам', 'Моисей', 'Иуда', 'Иосиф', 'Ной', 'Захария', 'Шалом'];
+var WIZARD_SURNAMES = [' Шмидт', ' Шнайдер', ' Фишер', ' Мюллер', ' Рихтер', ' Браун', ' Кох', ' Кёлер'];
+var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var WIZARD_QUANTITY = 4;
 
-var wizardNames = ['Лазарь', 'Авраам', 'Моисей', 'Иуда', 'Иосиф', 'Ной', 'Захария', 'Шалом'];
-var wizardSurnames = [' Шмидт', ' Шнайдер', ' Фишер', ' Мюллер', ' Рихтер', ' Браун', ' Кох', ' Кёлер'];
-var coatColor = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var eyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
+var wizards = [];
 
-var generateRandomValue = function (arr) {
+var generateRandomArrNumber = function (arr) {
   var randomNumber = Math.floor(Math.random() * arr.length);
   var randomValue = arr[randomNumber];
   arr.splice(randomNumber, 1);
   return randomValue;
 };
 
-var assembleWizard = function () {
+
+var createWizardElements = function () {
   var wizard = {
-    name: generateRandomValue(wizardNames),
-    surname: generateRandomValue(wizardSurnames),
-    coatColor: generateRandomValue(coatColor),
-    eyesColor: generateRandomValue(eyesColor),
+    name: generateRandomArrNumber(WIZARD_NAMES),
+    surname: generateRandomArrNumber(WIZARD_SURNAMES),
+    coatColor: generateRandomArrNumber(COAT_COLOR),
+    eyesColor: generateRandomArrNumber(EYES_COLOR),
   };
   return wizard;
 };
 
-var wizards = [];
+
+var createWizardsArr = function (quantity) {
+  for (var i = 0; i < quantity; i++) {
+    wizards[i] = createWizardElements();
+  }
+  return wizards;
+};
 
 document.querySelector('.setup').classList.remove('hidden');
 
@@ -38,12 +47,16 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var wizardQuantity = 4;
+createWizardsArr(WIZARD_QUANTITY);
+
 var fragment = document.createDocumentFragment();
 
-for (var i = 0; i < wizardQuantity; i++) {
-  wizards[i] = assembleWizard();
-  fragment.appendChild(renderWizard(wizards[i]));
-}
+var renderWizards = function (quantity) {
+  for (var i = 0; i < quantity; i++) {
+    fragment.appendChild(renderWizard(wizards[i]));
+  }
+};
+
+renderWizards(WIZARD_QUANTITY);
 
 document.querySelector('.setup-similar').classList.remove('hidden');
