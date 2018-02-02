@@ -30,8 +30,6 @@ var createWizards = function (quantity) {
   return wizards;
 };
 
-createWizards(WIZARD_QUANTITY);
-
 document.querySelector('.setup').classList.remove('hidden');
 
 var similarListElement = document.querySelector('.setup-similar-list');
@@ -49,8 +47,9 @@ var renderWizard = function (wizard) {
 var fragment = document.createDocumentFragment();
 
 var renderWizards = function (quantity) {
+  var mages = createWizards(WIZARD_QUANTITY);
   for (var i = 0; i < quantity; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
+    fragment.appendChild(renderWizard(mages[i]));
   }
 };
 
