@@ -8,8 +8,7 @@ var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var wizardNames = ['Лазарь', 'Авраам', 'Моисей', 'Иуда', 'Иосиф', 'Ной', 'Захария', 'Шалом'];
 var wizardSurnames = [' Шмидт', ' Шнайдер', ' Фишер', ' Мюллер', ' Рихтер', ' Браун', ' Кох', ' Кёлер'];
-var coatColor = COAT_COLOR.slice();
-var eyesColor = EYES_COLOR.slice();
+
 
 var getRandomValue = function (arr) {
   var randomNumber = Math.floor(Math.random() * arr.length);
@@ -19,6 +18,8 @@ var getRandomValue = function (arr) {
 };
 
 var generateWizard = function () {
+  var coatColor = COAT_COLOR.slice();
+  var eyesColor = EYES_COLOR.slice();
   var wizard = {
     name: getRandomValue(wizardNames),
     surname: getRandomValue(wizardSurnames),
@@ -129,16 +130,16 @@ userNameInput.addEventListener('invalid', function () {
 });
 
 // для следующих пунктов напишем функцию, которая дает случайный элемент массива
-var pickRandomValue = function (arr) {
-  var randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
+var getRandomItemFromArray = function (array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
 };
 
 // 3. Изменение цвета мантии по нажатию
 var coat = setup.querySelector('.setup-wizard .wizard-coat');
 
 coat.addEventListener('click', function () {
-  coat.style.fill = pickRandomValue(COAT_COLOR);
+  coat.style.fill = getRandomItemFromArray(COAT_COLOR);
 });
 
 
@@ -146,7 +147,7 @@ coat.addEventListener('click', function () {
 var eyes = setup.querySelector('.setup-wizard .wizard-eyes');
 
 eyes.addEventListener('click', function () {
-  eyes.style.fill = pickRandomValue(EYES_COLOR);
+  eyes.style.fill = getRandomItemFromArray(EYES_COLOR);
 });
 
 
@@ -154,5 +155,5 @@ eyes.addEventListener('click', function () {
 var fireball = setup.querySelector('.setup-fireball-wrap');
 
 fireball.addEventListener('click', function () {
-  fireball.style.background = pickRandomValue(FIREBALL_COLORS);
+  fireball.style.background = getRandomItemFromArray(FIREBALL_COLORS);
 });
