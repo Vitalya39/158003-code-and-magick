@@ -17,22 +17,19 @@ var getRandomValue = function (arr) {
   return randomValue;
 };
 
-var generateWizard = function () {
-  var coatColor = COAT_COLOR.slice();
-  var eyesColor = EYES_COLOR.slice();
-  var wizard = {
-    name: getRandomValue(wizardNames),
-    surname: getRandomValue(wizardSurnames),
-    coatColor: getRandomValue(coatColor),
-    eyesColor: getRandomValue(eyesColor),
-  };
-  return wizard;
-};
+
 
 var createWizards = function (quantity) {
+  var coatColor = COAT_COLOR.slice();
+  var eyesColor = EYES_COLOR.slice();
   var wizards = [];
   for (var i = 0; i < quantity; i++) {
-    wizards[i] = generateWizard();
+    wizards[i] = {
+      name: getRandomValue(wizardNames),
+      surname: getRandomValue(wizardSurnames),
+      coatColor: getRandomValue(coatColor),
+      eyesColor: getRandomValue(eyesColor),
+    };
   }
   return wizards;
 };
