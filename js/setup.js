@@ -17,8 +17,6 @@ var getRandomValue = function (arr) {
   return randomValue;
 };
 
-
-
 var createWizards = function (quantity) {
   var coatColor = COAT_COLOR.slice();
   var eyesColor = EYES_COLOR.slice();
@@ -127,16 +125,23 @@ userNameInput.addEventListener('invalid', function () {
 });
 
 // для следующих пунктов напишем функцию, которая дает случайный элемент массива
-var getRandomItemFromArray = function (array) {
-  var randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
+// var getRandomItemFromArray = function (array) {
+//   var randomIndex = Math.floor(Math.random() * array.length);
+//   return array[randomIndex];
+// };
+
+// или используем функцию которая выдает следующий элемент массива
+var getNexItemFromArray = function (array) {
+  var color = array.splice(0, 1)[0];
+  array.push(color);
+  return color;
 };
 
 // 3. Изменение цвета мантии по нажатию
 var coat = setup.querySelector('.setup-wizard .wizard-coat');
 
 coat.addEventListener('click', function () {
-  coat.style.fill = getRandomItemFromArray(COAT_COLOR);
+  coat.style.fill = getNexItemFromArray(COAT_COLOR);
 });
 
 
@@ -144,7 +149,7 @@ coat.addEventListener('click', function () {
 var eyes = setup.querySelector('.setup-wizard .wizard-eyes');
 
 eyes.addEventListener('click', function () {
-  eyes.style.fill = getRandomItemFromArray(EYES_COLOR);
+  eyes.style.fill = getNexItemFromArray(EYES_COLOR);
 });
 
 
@@ -152,5 +157,5 @@ eyes.addEventListener('click', function () {
 var fireball = setup.querySelector('.setup-fireball-wrap');
 
 fireball.addEventListener('click', function () {
-  fireball.style.background = getRandomItemFromArray(FIREBALL_COLORS);
+  fireball.style.background = getNexItemFromArray(FIREBALL_COLORS);
 });
